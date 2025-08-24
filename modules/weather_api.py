@@ -43,7 +43,7 @@ class WeatherAPI:
             "lat": lat,
             "lon": lon,
             "appid": self.api_key,
-            "units": "metric"  # Celsius, meters/sec for wind
+            "units": "imperial"  # Fahrenheit, mph for wind
         }
         
         try:
@@ -62,7 +62,7 @@ class WeatherAPI:
                 "icon": data["weather"][0]["icon"],
                 "wind_speed": data["wind"]["speed"],
                 "wind_direction": data["wind"].get("deg", 0),
-                "visibility": data.get("visibility", 0) / 1000,  # Convert to km
+                "visibility": data.get("visibility", 0) / 1609.34,  # Convert to miles
                 "sunrise": datetime.fromtimestamp(data["sys"]["sunrise"]),
                 "sunset": datetime.fromtimestamp(data["sys"]["sunset"]),
                 "timestamp": datetime.now()
@@ -92,7 +92,7 @@ class WeatherAPI:
             "lat": lat,
             "lon": lon,
             "appid": self.api_key,
-            "units": "metric"
+            "units": "imperial"
         }
         
         try:
@@ -164,13 +164,30 @@ class WeatherAPI:
 
 def get_user_location() -> Dict[str, Any]:
     """
-    Get user's location using IP geolocation (free service)
+    Get user's location - uses .env coordinates, falls back to IP detection
     
     Returns:
         Dict containing lat, lon, city info
     """
+    
+    # Use coordinates from .env file if available
+    default_lat = os.getenv('DEFAULT_LATITUDE')
+    default_lon = os.getenv('DEFAULT_LONGITUDE')
+    
+    if default_lat and default_lon:
+        try:
+            return {
+                "latitude": float(default_lat),
+                "longitude": float(default_lon),
+                "city": os.getenv('DEFAULT_CITY', 'Rochester'),
+                "region": os.getenv('DEFAULT_REGION', 'New Hampshire'),
+                "country": "United States"
+            }
+        except ValueError:
+            pass  # Fall back to IP detection
+    
+    # Fallback to IP-based location detection
     try:
-        # Using ipapi.co free service (1000 requests/day)
         response = requests.get("https://ipapi.co/json/", timeout=5)
         response.raise_for_status()
         data = response.json()
@@ -184,12 +201,12 @@ def get_user_location() -> Dict[str, Any]:
         }
         
     except requests.RequestException as e:
-        # Fallback to a default location (you can change this)
+        # Final fallback to Rochester, NH
         return {
-            "latitude": 45.5017,  # Montreal as example
-            "longitude": -73.5673,
-            "city": "Montreal",
-            "region": "Quebec",
-            "country": "Canada",
-            "error": f"Could not detect location: {str(e)}"
+            "latitude": 43.3000803,
+            "longitude": -70.988277,
+            "city": "Rochester",
+            "region": "New Hampshire",
+            "country": "United States",
+            "error": f"Using fallback location: {str(e)}"
         }

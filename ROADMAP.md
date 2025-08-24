@@ -49,7 +49,7 @@ Home project - get basic functionality working, polish later when time allows.
 ## Current Status
 
 - **Active Phase**: Phase 1
-- **Last Updated**: 2025-08-24 14:52:03
+- **Last Updated**: 2025-08-24 15:43:29
 - **Completed Features**: 0/8
 - **Current Branch**: main
 
@@ -58,6 +58,9 @@ Home project - get basic functionality working, polish later when time allows.
 _Add key decisions, architectural choices, and lessons learned here_
 
 ### Completed Features
+- **2025-08-24**: Completed: UI polish: Rochester localization, Freedom Units, demo cleanup
+- **2025-08-24**: Started: Polish UI design and integrate real weather API key for live data
+- **2025-08-24**: Completed: Add OpenWeatherMap API integration with auto-location and 7-day forecast
 
 - **2025-08-24**: Started: Add OpenWeatherMap API integration for basic weather data
 - **2025-08-24**: Completed: Added persistent roadmap storage system
