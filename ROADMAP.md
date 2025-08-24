@@ -6,47 +6,50 @@ _Generated from AI discovery session_
 
 ### What are you building?
 
-_[AI fills this during discovery]_
+Personal weather app with auto-location, today's weather prominently displayed, and 7-day forecast below.
 
 ### Who are the users?
 
-_[AI fills this during discovery]_
+Kevin - personal home project, no budget/enterprise requirements.
 
 ### Core features needed?
 
-_[AI fills this during discovery]_
+- Auto-location weather lookup
+- Today's weather (main display)
+- 7-day forecast (below main)
+- Temperature & precipitation (priority), plus wind/humidity/sunrise-sunset
 
 ### Technical requirements?
 
-_[AI fills this during discovery]_
+Flask app, free weather API, no database needed, casual timeline.
 
 ### Timeline and priorities?
 
-_[AI fills this during discovery]_
+Home project - get basic functionality working, polish later when time allows.
 
 ## Development Phases
 
 ### Phase 1: Foundation
 
-- [ ] **Branch 1**: Setup core structure
-- [ ] **Branch 2**: Basic functionality
-- [ ] **Branch 3**: Initial testing
+- [x] **Branch 1**: Setup core structure ✓
+- [ ] **Branch 2**: Weather API integration (OpenWeatherMap free tier)
+- [ ] **Branch 3**: Basic weather display page
 
 ### Phase 2: Core Features
 
-- [ ] **Branch 4**: Main feature implementation
-- [ ] **Branch 5**: User interface
-- [ ] **Branch 6**: Data processing
+- [ ] **Branch 4**: Auto-location detection
+- [ ] **Branch 5**: Today's weather main display
+- [ ] **Branch 6**: 7-day forecast layout
 
 ### Phase 3: Enhancement
 
-- [ ] **Branch 7**: Advanced features
-- [ ] **Branch 8**: Polish and deployment
+- [ ] **Branch 7**: Polish UI and add all weather details
+- [ ] **Branch 8**: Mobile responsiveness and final touches
 
 ## Current Status
 
 - **Active Phase**: Phase 1
-- **Last Updated**: 2025-08-24 14:35:55
+- **Last Updated**: 2025-08-24 14:52:03
 - **Completed Features**: 0/8
 - **Current Branch**: main
 
@@ -55,6 +58,8 @@ _[AI fills this during discovery]_
 _Add key decisions, architectural choices, and lessons learned here_
 
 ### Completed Features
+
+- **2025-08-24**: Started: Add OpenWeatherMap API integration for basic weather data
 - **2025-08-24**: Completed: Added persistent roadmap storage system
 - **2025-08-24**: Started: Fix critical template bug: Add persistent roadmap and goals storage system
 

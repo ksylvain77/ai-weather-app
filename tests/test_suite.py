@@ -1,8 +1,167 @@
 #!/usr/bin/env python3
 """
-Weather app - Comprehensive Testing Suite
-Template for 4-phase testing methodology
+Weather app - Test Suite
+
+DRY testing format for AI-native development
 """
+
+# Backend Tests (DRY format)
+BACKEND_TESTS = {
+    "get_user_location": {
+        "description": "Test user location detection returns required fields",
+        "module": "modules.weather_api", 
+        "function": "get_user_location",
+        "assertions": [
+            "assert 'latitude' in result",
+            "assert 'longitude' in result",
+            "assert isinstance(result['latitude'], (int, float))",
+            "assert isinstance(result['longitude'], (int, float))"
+        ]
+    },
+    
+    "get_current_weather": {
+        "description": "Test WeatherAPI get_current_weather method exists and callable",
+        "module": "modules.weather_api",
+        "function": "WeatherAPI().get_current_weather",
+        "assertions": ["assert callable(result)"]
+    },
+    
+    "get_forecast": {
+        "description": "Test WeatherAPI get_forecast method exists and callable", 
+        "module": "modules.weather_api",
+        "function": "WeatherAPI().get_forecast",
+        "assertions": ["assert callable(result)"]
+    },
+    
+    "get_status": {
+        "description": "Test core status function returns expected format",
+        "module": "modules.core",
+        "function": "get_status", 
+        "assertions": ["assert 'status' in result"]
+    },
+    
+    "get_timestamp": {
+        "description": "Test utils timestamp function works",
+        "module": "modules.utils",
+        "function": "get_timestamp",
+        "assertions": ["assert isinstance(result, str)"]
+    },
+    
+    "load_config": {
+        "description": "Test utils load_config function exists",
+        "module": "modules.utils",
+        "function": "load_config",
+        "assertions": ["assert callable(result)"]
+    },
+    
+    "process_data": {
+        "description": "Test core process_data function exists",
+        "module": "modules.core",
+        "function": "process_data", 
+        "assertions": ["assert callable(result)"]
+    },
+    
+    "save_log": {
+        "description": "Test utils save_log function exists",
+        "module": "modules.utils",
+        "function": "save_log",
+        "assertions": ["assert callable(result)"]
+    }
+}
+
+# API Tests (simple dictionary format)
+API_TESTS = {
+    "health_check": {
+        "endpoint": "/health",
+        "expected_fields": ["status", "service", "timestamp"]
+    },
+    
+    "api_documentation": {
+        "endpoint": "/api",
+        "expected_fields": ["name", "version", "endpoints"]
+    },
+    
+    "/api/location": {
+        "endpoint": "/api/location", 
+        "expected_fields": ["latitude", "longitude"]
+    },
+    
+    "/api/weather": {
+        "endpoint": "/api/weather",
+        "expected_fields": ["error"]  # Will error without API key, but should return error structure
+    },
+    
+    "/api/forecast": {
+        "endpoint": "/api/forecast", 
+        "expected_fields": ["error"]  # Will error without API key, but should return error structure
+    },
+    
+    "weather_demo": {
+        "endpoint": "/weather/demo",
+        "expected_content": "Demo weather unavailable"  # Expected with demo API key
+    }
+}
+
+# Contract Tests - API Response Structure
+CONTRACT_TESTS = {
+    "/api/weather": {
+        "description": "Weather API should return consistent error structure without API key",
+        "expected_structure": {
+            "error": "string"
+        }
+    },
+    
+    "/api/forecast": {
+        "description": "Forecast API should return consistent error structure without API key", 
+        "expected_structure": {
+            "error": "string"
+        }
+    },
+    
+    "/api/location": {
+        "description": "Location API should return coordinate structure",
+        "expected_structure": {
+            "latitude": "number",
+            "longitude": "number", 
+            "city": "string"
+        }
+    }
+}
+
+# Frontend Tests - UI Elements
+FRONTEND_TESTS = {
+    "main_dashboard": {
+        "description": "Main page should show weather app message",
+        "url": "/",
+        "expected_elements": [
+            "Weather App"
+        ]
+    },
+    
+    "/api/weather": {
+        "description": "Weather API should return JSON error without key",
+        "url": "/api/weather",
+        "expected_elements": [
+            "error"
+        ]
+    },
+    
+    "/api/forecast": {
+        "description": "Forecast API should return JSON error without key", 
+        "url": "/api/forecast",
+        "expected_elements": [
+            "error"
+        ]
+    },
+    
+    "/api/location": {
+        "description": "Location API should return coordinates",
+        "url": "/api/location",
+        "expected_elements": [
+            "latitude"
+        ]
+    }
+}
 
 import sys
 import os
